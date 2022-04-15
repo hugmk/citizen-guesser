@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments/header.html"></head>
+<body class="bg-blue-700">
+    <div class="flex flex-row h-screen">
+        <div class="basis-1/2 border-solid border-r-2 border-white grid place-content-center">
+            <h1 class="font-sans text-6xl text-white font-bold text-center" th:text="${knownCity.nom}"></h1>
+            <div class="grid place-content-center mt-10">
+                <iframe
+                    width="700"
+                    height="440"
+                    style="border:0"
+                    loading="lazy"
+                    th:src="${knownCity.getMapSource()}">"
+                </iframe>
+            </div>
+            <div class="mt-10 grid place-content-center">
+                <h1 class="font-sans text-5xl text-white font-semibold text-center" th:text="${knownCity.getFormattedPopulation()}"></h1>
+                <h1 class="font-sans text-2xl text-white font-normal text-center">habitants</h1>
+            </div>
+        </div>
+        <div class="basis-1/2 border-solid border-l-2 border-white grid place-content-center">
+            <h1 class="font-sans text-6xl text-white font-bold text-center" th:text="${unknownCity.nom}"></h1>
+            <div class="grid place-content-center mt-10">
+                <iframe
+                    width="700"
+                    height="440"
+                    style="border:0"
+                    loading="lazy"
+                    th:src="${unknownCity.getMapSource()}">"
+                </iframe>
+            </div>
+            <div class="grid place-content-center">
+                <div class="flex flex-row mt-10">
+                    <div class="pr-10 transform transition duration-500 hover:scale-110 text-center">
+                        <form action="/play/answer" method="post">
+                            <input type="submit" class="
+                            px-7 py-2 rounded-full
+                            bg-teal-500 font-bold
+                            text-2xl text-white
+                            cursor-pointer" name="answer" value="Plus" />
+                        </form>
+                    </div>
+                    <div class="pl-10 transform transition duration-500 hover:scale-110 text-center">
+                        <form action="/play/answer" method="post">
+                            <input type="submit" class="
+                            px-7 py-2 rounded-full
+                            bg-teal-500 font-bold
+                            text-2xl text-white
+                            cursor-pointer" name="answer" value="Moins" />
+                        </form>
+                    </div>
+                </div>
+                <h1 class="font-sans text-2xl text-white font-normal text-center">d'habitants</h1>
+            </div>
+            <div class="absolute bottom-0 right-0 pb-2 pr-2">
+                <div class="flex flex-row items-center justify-center">
+                    <div class="columns-3">
+                        <span class="self-auto" th:if="${hardMode}">
+                            <span th:if="${(allowedErrors)-hearts > 0}"
+                                  th:each="i: ${#numbers.sequence(1, (allowedErrors)-hearts)}">
+                                <img class="w-6 invert" th:src="@{/images/empty-heart.png}" alt="heart">
+                            </span>
+                            <span th:if="${hearts > 0}" th:each="i: ${#numbers.sequence(1, hearts)}">
+                                <img class="w-6 invert" th:src="@{/images/filled-heart.png}" alt="heart">
+                            </span>
+                        </span>
+                    </div>
+                    <span class="font-sans text-3xl text-white font-semibold text-center ml-6">Score : </span>
+                    <span class="font-sans text-3xl text-white font-semibold text-center pl-2" th:text="${score}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

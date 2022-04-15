@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments/header.html"></head>
+<body class="bg-black">
+<div id="background-score" class="bg-no-repeat bg-cover" th:style="'background-image: url('+ ${gif} +');'">
+    <div class="content-score-background">
+        <div class="p-52 pt-72">
+            <img class="w-24 ml-auto mr-auto -mt-20" th:src="@{/images/citizenGuesserImage.png}">
+
+            <div class="grid place-content-center mt-20">
+                <div>
+                    <span class="font-sans text-8xl text-white font-bold">Score : </span>
+                    <span class="font-sans text-8xl text-white font-bold" th:text="${score}"></span>
+                </div>
+            </div>
+
+            <div class="grid place-content-center">
+                <div class="flex flex-row mt-20">
+                    <div class="transform transition duration-500 hover:scale-110 text-center">
+                        <form action="/">
+                            <input type="submit" class="
+                px-7 py-2 rounded-full
+                bg-teal-500 font-bold
+                text-xl text-white
+                cursor-pointer" value="Menu" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
