@@ -37,6 +37,9 @@ public class PlayController {
     @Value("${app.name}")
     private String appName;
 
+    @Value("${api.google.url}")
+    private String apiGoogleUrl;
+
     @PostMapping(value = "/start")
     public String start(@RequestParam String mode)
     {
@@ -62,6 +65,8 @@ public class PlayController {
 
         model.addAttribute("knownCity", knownCity);
         model.addAttribute("unknownCity", unknownCity);
+        model.addAttribute("knownCityMap", getMapSource(knownCity.getNom(), knownCity.getCodePostal()));
+        model.addAttribute("unknownCityMap", getMapSource(unknownCity.getNom(), unknownCity.getCodePostal()));
         model.addAttribute("score", score);
         model.addAttribute("appName", appName);
         model.addAttribute("hardMode", hardMode);
@@ -113,6 +118,13 @@ public class PlayController {
         for (String department: departments) {
             pickedCities.put(department, new ArrayList<>());
         }
+    }
+
+    private String getMapSource(String nom, String codePostal) {
+        return  apiGoogleUrl + "&q="
+                + nom + " "
+                + codePostal
+                + "&zoom=7";
     }
 
     private void reset(){

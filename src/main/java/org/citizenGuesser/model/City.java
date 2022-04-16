@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class City {
+
     private String nom;
     private int population;
     private String code;
@@ -46,13 +47,6 @@ public class City {
 
     public String getFormattedPopulation() {
         return String.format("%, d \n", population);
-    }
-
-    public String getMapSource() {
-        return "https://www.google.com/maps/embed/v1/place?key=AIzaSyC_jBQ_3VNiydl0Sfhdvfd-7YTOhJkBam8&q="
-                + nom + " "
-                + getCodePostal()
-                + "&zoom=7";
     }
 
     public String getCodePostal() {
